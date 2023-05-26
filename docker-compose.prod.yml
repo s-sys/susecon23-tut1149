@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  postgres:
+    env_file:
+      - ./envs.prod/postgres.env
+
+  integration:
+    env_file:
+      - ./envs.prod/jira.env
+      - ./envs.prod/postgres.env
+      - ./envs.prod/susemanager.env

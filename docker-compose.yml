@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:14.0
+    restart: unless-stopped
+    volumes:
+      - ./postgres/:/docker-entrypoint-initdb.d/:ro
+      - postgres_data:/var/lib/postgresql/data/
+
+  integration:
+    build: ./integration/
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
